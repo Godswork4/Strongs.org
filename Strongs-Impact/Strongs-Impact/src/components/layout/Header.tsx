@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { Sun, Moon, Menu, X, Search } from "lucide-react";
 import { navigate } from "../../hooks/useLocation";
 import { ThemeContext } from "../../context/ThemeProvider";
-import Logo from "../ui/Logo";
+import Logo from "../../assets/Strongs.png";
 
 interface HeaderProps {
   isScrolled: boolean;
