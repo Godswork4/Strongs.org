@@ -3,9 +3,9 @@ import React from "react";
 const Logo: React.FC = () => {
   return (
     <div className="flex items-center">
-      <div className="h-10 w-10 overflow-hidden rounded-full white-100 flex items-center justify-center">
+      <div className="h-10 w-10 overflow-hidden rounded-full bg-white dark:bg-slate-800 flex items-center justify-center border border-blue-200 dark:border-blue-800">
         <img
-          src="/src/assets/Strongs.png"
+          src="/assets/Strongs.png"
           alt="Strongs Logo"
           className="h-10 w-10 object-cover"
           onError={(e) => {
@@ -17,7 +17,7 @@ const Logo: React.FC = () => {
             if (parent) {
               const fallback = document.createElement("div");
               fallback.textContent = "S";
-              fallback.className = "text-white font-bold text-xl";
+              fallback.className = "text-blue-600 dark:text-blue-400 font-bold text-lg";
               parent.appendChild(fallback);
             }
           }}
