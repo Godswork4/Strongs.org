@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { Sun, Moon, Menu, X, Search } from "lucide-react";
 import { navigate } from "../../hooks/useLocation";
 import { ThemeContext } from "../../context/ThemeProvider";
-import Logo from "../../assets/Strongs.png";
+import strongsLogo from "../../assets/Strongs.png";
 
 interface HeaderProps {
   isScrolled: boolean;
@@ -30,10 +30,14 @@ const Header = ({ isScrolled }: HeaderProps) => {
 
           {/* Logo */}
           <div
-            className="flex-shrink-0 cursor-pointer"
-            onClick={() => handleNavigation("/")}
+           className="flex-shrink-0 cursor-pointer"
+           onClick={() => handleNavigation("/")}
           >
-            <Logo />
+           <img 
+           src={strongsLogo} 
+           alt="Strongs Logo" 
+           className="h-8 w-auto object-contain md:h-10" // Keeps it responsive and perfectly sized for the 16/20 h-bars
+           />
           </div>
 
           {/* Desktop Nav */}
