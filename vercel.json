@@ -1,6 +1,5 @@
 {
-  "buildCommand": "cd Strongs-Impact/Strongs-Impact && npm run build",
+  "buildCommand": "npm run build",
   "outputDirectory": "Strongs-Impact/Strongs-Impact/dist",
-  "devCommand": "cd Strongs-Impact/Strongs-Impact && npm run dev",
-  "installCommand": "cd Strongs-Impact/Strongs-Impact && npm install"
+  "devCommand": "npm run dev"
 }
