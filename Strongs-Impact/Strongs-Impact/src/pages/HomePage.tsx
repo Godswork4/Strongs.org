@@ -45,9 +45,10 @@ const CountUnit = ({ value, label }: { value: number; label: string }) => (
 
 const UpcomingEventBanner = () => {
   const t = useCountdown("2026-07-08T00:00:00");
+  const [imageError, setImageError] = useState(false);
 
   return (
-    <section className="py-20 bg-white dark:bg-slate-900">
+    <section className="py-16 md:py-20 bg-white dark:bg-slate-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <SectionLabel>Don't Miss It</SectionLabel>
@@ -56,56 +57,74 @@ const UpcomingEventBanner = () => {
           </h2>
         </div>
 
-        <div className="max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-2">
-          {/* Flyer */}
-          <div className="relative h-72 lg:h-auto min-h-[400px]">
-            <img
-              src="https://scontent.fiba2-2.fna.fbcdn.net/v/t39.30808-6/717139632_1289325793371203_1089666731582122475_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_eui2=AeFOhMgaIyUl5OhJAKJHb3IKT8JPPb-f0Q5Pwk89v5_RDt3KAR1MqWZyhg4rHxv-eaLclOAA2T4BoQODPWTucsJB&_nc_ohc=KNAlnSehQRsQ7kNvwGRcGHW&_nc_oc=Adq_3CAkYr-_JHmZi4KU4Dnnl_ohqhJkWX0sX8Yjzy2iBwcAAbgOiS9y7NL4cyEAEk8&_nc_zt=23&_nc_ht=scontent.fiba2-2.fna&_nc_gid=FLntbHbAjeLeclElTriktw&_nc_ss=7b2a8&oh=00_Af8j9-KJU77i7AL6hhR39vD7X_ADp1zBnNg3BH4DDsruvA&oe=6A289403"
-              alt="Student Mission Conference 2026 Flyer"
-              className="w-full h-full object-cover absolute inset-0"
-            />
-          </div>
-
-          {/* Details panel */}
-          <div className="bg-slate-900 flex flex-col justify-between p-8 md:p-10">
-            <div>
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-600/30 text-blue-300 mb-5">
-                Conference
-              </span>
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-5 leading-snug">
-                Student Mission Conference 2026
-              </h3>
-              <div className="space-y-3 mb-8">
-                <div className="flex items-center gap-3 text-slate-300 text-sm">
-                  <Calendar className="h-4 w-4 text-blue-400 flex-shrink-0" />
-                  <span>July 8–12, 2026</span>
+        <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-2xl bg-slate-900">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+            {/* Flyer Image */}
+            <div className="relative w-full h-64 sm:h-80 lg:h-full min-h-[400px] bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center overflow-hidden">
+              {!imageError ? (
+                <img
+                  src="https://scontent.fiba2-2.fna.fbcdn.net/v/t39.30808-6/717139632_1289325793371203_1089666731582122475_n.jpg"
+                  alt="Student Mission Conference 2026 Flyer"
+                  className="w-full h-full object-cover"
+                  onError={() => setImageError(true)}
+                  loading="lazy"
+                />
+              ) : (
+                <div className="flex flex-col items-center justify-center w-full h-full p-8 text-center">
+                  <div className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400 mb-4">
+                    SMC
+                  </div>
+                  <p className="text-xl md:text-2xl font-bold text-white mb-2">
+                    Student Mission Conference
+                  </p>
+                  <p className="text-sm md:text-base text-slate-400">
+                    July 8–12, 2026
+                  </p>
                 </div>
-                <div className="flex items-center gap-3 text-slate-300 text-sm">
-                  <MapPin className="h-4 w-4 text-blue-400 flex-shrink-0" />
-                  <span>Lautech Inter-dominational Chapel</span>
-                </div>
-              </div>
-
-              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-blue-400 mb-4">
-                Starts in
-              </p>
-              <div className="flex items-end gap-3 mb-8">
-                <CountUnit value={t.days} label="Days" />
-                <span className="text-white/30 text-xl font-bold mb-4">:</span>
-                <CountUnit value={t.hours} label="Hours" />
-                <span className="text-white/30 text-xl font-bold mb-4">:</span>
-                <CountUnit value={t.minutes} label="Min" />
-                <span className="text-white/30 text-xl font-bold mb-4">:</span>
-                <CountUnit value={t.seconds} label="Sec" />
-              </div>
+              )}
             </div>
 
-            <button
-              onClick={() => navigate("/SmcRegistrationPage")}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 rounded-xl transition-colors flex items-center justify-center gap-2 text-sm"
-            >
-              Register Now <ArrowRight className="h-4 w-4" />
-            </button>
+            {/* Details Panel */}
+            <div className="bg-slate-900 flex flex-col justify-between p-6 sm:p-8 md:p-10">
+              <div>
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-600/30 text-blue-300 mb-5">
+                  Conference
+                </span>
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-5 leading-snug">
+                  Student Mission Conference 2026
+                </h3>
+                <div className="space-y-3 mb-8">
+                  <div className="flex items-center gap-3 text-slate-300 text-sm md:text-base">
+                    <Calendar className="h-5 w-5 md:h-6 md:w-6 text-blue-400 flex-shrink-0" />
+                    <span>July 8–12, 2026</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-slate-300 text-sm md:text-base">
+                    <MapPin className="h-5 w-5 md:h-6 md:w-6 text-blue-400 flex-shrink-0" />
+                    <span>Lautech Inter-dominational Chapel</span>
+                  </div>
+                </div>
+
+                <p className="text-xs font-semibold tracking-[0.2em] uppercase text-blue-400 mb-4">
+                  Starts in
+                </p>
+                <div className="flex items-end gap-2 md:gap-3 mb-8 flex-wrap">
+                  <CountUnit value={t.days} label="Days" />
+                  <span className="text-white/30 text-lg md:text-xl font-bold mb-4">:</span>
+                  <CountUnit value={t.hours} label="Hours" />
+                  <span className="text-white/30 text-lg md:text-xl font-bold mb-4">:</span>
+                  <CountUnit value={t.minutes} label="Min" />
+                  <span className="text-white/30 text-lg md:text-xl font-bold mb-4">:</span>
+                  <CountUnit value={t.seconds} label="Sec" />
+                </div>
+              </div>
+
+              <button
+                onClick={() => navigate("/SmcRegistrationPage")}
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 md:py-4 rounded-xl transition-colors flex items-center justify-center gap-2 text-sm md:text-base"
+              >
+                Register Now <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -143,7 +162,7 @@ const HomePage = () => {
             Discover The Depth<br className="hidden sm:block" /> of God's Word
           </h1>
           <p className={`text-lg md:text-xl text-slate-300 mb-10 leading-relaxed ${fadeUp("delay-300")}`}>
-            Explore biblical resources, mission training, evangelism tools, and discipleship materials designed to help you grow spiritually, strengthen your faith, convert sinners, and impact your world for Christ.
+            Explore biblical resources, mission training, evangelism tools, and discipleship materials designed to help you grow spiritually, strengthen your faith, convert sinners, and impact your world.
           </p>
           <div className={`flex flex-col sm:flex-row justify-center gap-4 ${fadeUp("delay-500")}`}>
             <button
@@ -288,10 +307,10 @@ interface CategoryCardProps {
 
 const CategoryCard = ({ icon, title, description, onClick }: CategoryCardProps) => (
   <div
-    className="group bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-7 flex flex-col items-center text-center cursor-pointer transition-all duration-300 hover:border-blue-500 dark:hover:border-blue-500 hover:shadow-lg hover:-translate-y-0.5"
+    className="group bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-7 flex flex-col items-center text-center cursor-pointer transition-all duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10"
     onClick={onClick}
   >
-    <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-5 group-hover:bg-blue-600 group-hover:text-white dark:group-hover:bg-blue-600 dark:group-hover:text-white transition-colors duration-300">
+    <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-5 group-hover:bg-blue-600 group-hover:text-white transition-all">
       {icon}
     </div>
     <h3 className="text-base font-semibold mb-2 text-slate-900 dark:text-white">
