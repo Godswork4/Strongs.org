@@ -4,6 +4,7 @@ import { navigate } from "../hooks/useLocation";
 import FeaturedContent from "../components/home/FeaturedContent";
 import LatestArticles from "../components/home/LatestArticles";
 import ScriptureWidget from "../components/home/ScriptureWidget";
+import smcflyer from "../../assets/smc.png";
 
 const useCountdown = (target: string) => {
   const calc = () => {
@@ -63,7 +64,7 @@ const UpcomingEventBanner = () => {
             <div className="relative w-full h-64 sm:h-80 lg:h-full min-h-[400px] bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center overflow-hidden">
               {!imageError ? (
                 <img
-                  src="https://scontent.fiba2-2.fna.fbcdn.net/v/t39.30808-6/717139632_1289325793371203_1089666731582122475_n.jpg"
+                  src={smcflyer}
                   alt="Student Mission Conference 2026 Flyer"
                   className="w-full h-full object-cover"
                   onError={() => setImageError(true)}
