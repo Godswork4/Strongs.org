@@ -1,6 +1,5 @@
 import { Facebook, Twitter, Instagram, Youtube, Mail } from 'lucide-react';
 import { navigate } from '../../hooks/useLocation';
-import Logo from '../ui/Logo';
 
 const Footer = () => {
   const go = (path: string) => navigate(path);
