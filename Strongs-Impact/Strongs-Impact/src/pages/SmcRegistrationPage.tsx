@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { supabase } from "../lib/supabaseClient";
 
 const fellowshipOptions = [
   "CAC Youth Fellowship",
@@ -150,16 +151,67 @@ const SmcRegistrationPage = () => {
     otherCounselling: "",
   });
 
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: handle form submission (API call or email)
-    alert("Registration submitted! Thank you.");
+    setLoading(true);
+    setError(null);
+
+    const payload = {
+      name: form.name,
+      whatsapp: form.whatsapp,
+      email: form.email,
+      fellowship: form.fellowship,
+      department: form.department,
+      level: form.level,
+      calling: form.calling,
+      counselling: form.counselling,
+      other_fellowship: form.otherFellowship || null,
+      other_department: form.otherDepartment || null,
+      other_level: form.otherLevel || null,
+      other_counselling: form.otherCounselling || null,
+    };
+
+    try {
+      const { data, error: supaError } = await supabase.from('registrations').insert(payload);
+
+      if (supaError) {
+        console.error('Supabase insert error', supaError);
+        setError(supaError.message);
+        setLoading(false);
+        return;
+      }
+
+      setSuccess(true);
+      setForm({
+        name: "",
+        whatsapp: "",
+        email: "",
+        fellowship: "",
+        department: "",
+        level: "",
+        calling: "",
+        counselling: "",
+        otherFellowship: "",
+        otherDepartment: "",
+        otherLevel: "",
+        otherCounselling: "",
+      });
+    } catch (err) {
+      console.error('Unexpected error inserting registration', err);
+      setError('Unexpected error occured. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -168,6 +220,19 @@ const SmcRegistrationPage = () => {
         <h1 className="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-white">
           SMC Registration
         </h1>
+
+        {success && (
+          <div className="mb-6 p-4 bg-green-50 border border-green-200 text-green-800 rounded">
+            Thanks — your registration was received. We will contact you shortly.
+          </div>
+        )}
+
+        {error && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-800 rounded">
+            {error}
+          </div>
+        )}
+
         <form
           onSubmit={handleSubmit}
           className="bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md p-8 space-y-6"
@@ -351,9 +416,10 @@ const SmcRegistrationPage = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-800 hover:bg-blue-900 text-white font-semibold py-3 rounded-md transition-colors"
+            disabled={loading}
+            className={`w-full ${loading ? 'opacity-60 cursor-not-allowed' : ''} bg-blue-800 hover:bg-blue-900 text-white font-semibold py-3 rounded-md transition-colors`}
           >
-            Register
+            {loading ? 'Registering...' : 'Register'}
           </button>
         </form>
       </div>
