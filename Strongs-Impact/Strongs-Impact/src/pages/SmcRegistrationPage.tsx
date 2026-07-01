@@ -161,6 +161,28 @@ const SmcRegistrationPage = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const insertWithSupabaseClient = async (payload: any) => {
+    const { data, error } = await supabase.from('registrations').insert(payload);
+    if (error) throw error;
+    return data;
+  };
+
+  const postToServerEndpoint = async (payload: any) => {
+    const resp = await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (!resp.ok) {
+      const body = await resp.json().catch(() => ({}));
+      const message = body?.error || `Server returned ${resp.status}`;
+      const error: any = new Error(message);
+      error.status = resp.status;
+      throw error;
+    }
+    return resp.json();
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -182,15 +204,8 @@ const SmcRegistrationPage = () => {
     };
 
     try {
-      const { data, error: supaError } = await supabase.from('registrations').insert(payload);
-
-      if (supaError) {
-        console.error('Supabase insert error', supaError);
-        setError(supaError.message);
-        setLoading(false);
-        return;
-      }
-
+      // Try server endpoint first (more secure if configured)
+      await postToServerEndpoint(payload);
       setSuccess(true);
       setForm({
         name: "",
@@ -206,10 +221,40 @@ const SmcRegistrationPage = () => {
         otherLevel: "",
         otherCounselling: "",
       });
-    } catch (err) {
-      console.error('Unexpected error inserting registration', err);
-      setError('Unexpected error occured. Please try again.');
-    } finally {
+      setLoading(false);
+      return;
+    } catch (err: any) {
+      // If server endpoint not found (404) or fails, fallback to client supabase insert
+      if (err?.status === 404 || err?.message?.includes('Failed to fetch')) {
+        try {
+          await insertWithSupabaseClient(payload);
+          setSuccess(true);
+          setForm({
+            name: "",
+            whatsapp: "",
+            email: "",
+            fellowship: "",
+            department: "",
+            level: "",
+            calling: "",
+            counselling: "",
+            otherFellowship: "",
+            otherDepartment: "",
+            otherLevel: "",
+            otherCounselling: "",
+          });
+          setLoading(false);
+          return;
+        } catch (clientErr: any) {
+          console.error('Client supabase insert error', clientErr);
+          setError(clientErr.message || 'Failed to submit registration');
+          setLoading(false);
+          return;
+        }
+      }
+
+      console.error('Server endpoint error', err);
+      setError(err?.message || 'Failed to submit registration');
       setLoading(false);
     }
   };
