@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Sun, Moon, Menu, X, Search } from "lucide-react";
-import { navigate } from "../../hooks/useLocation";
 import { ThemeContext } from "../../context/ThemeProvider";
 import strongsLogo from "../../assets/Strongs.png";
 
@@ -11,6 +11,7 @@ interface HeaderProps {
 const Header = ({ isScrolled }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const navigate = useNavigate();
 
   const handleNavigation = (path: string) => {
     navigate(path);
@@ -36,7 +37,7 @@ const Header = ({ isScrolled }: HeaderProps) => {
            <img 
            src={strongsLogo} 
            alt="Strongs Logo" 
-           className="h-8 w-auto object-contain md:h-10" // Keeps it responsive and perfectly sized for the 16/20 h-bars
+           className="h-8 w-auto object-contain md:h-10"
            />
           </div>
 
