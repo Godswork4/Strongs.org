@@ -6,7 +6,7 @@ import AboutPage from "./pages/AboutPage";
 import ArticlePage from "./pages/ArticlePage";
 import ArticleDetailPage from "./pages/ArticleDetailPage";
 import ResourcesPage from "./pages/ResourcesPage";
-import EventsPage from "./pages/EventsPage";
+import EventsPage from "./hooks/EventsPage";
 import SmcRegistrationPage from "./pages/SmcRegistrationPage";
 import SearchPage from "./pages/SearchPage";
 import NotFoundPage from "./pages/NotFoundPage";
