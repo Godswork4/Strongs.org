@@ -4,7 +4,7 @@ import { navigate } from "../hooks/useLocation";
 import FeaturedContent from "../components/home/FeaturedContent";
 import LatestArticles from "../components/home/LatestArticles";
 import ScriptureWidget from "../components/home/ScriptureWidget";
-import smcflyer from "../../assets/smc.png";
+import smcflyer from "../assets/smc.png";
 
 const useCountdown = (target: string) => {
   const calc = () => {
@@ -308,10 +308,10 @@ interface CategoryCardProps {
 
 const CategoryCard = ({ icon, title, description, onClick }: CategoryCardProps) => (
   <div
-    className="group bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-7 flex flex-col items-center text-center cursor-pointer transition-all duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10"
+    className="group bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-7 flex flex-col items-center text-center cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-blue-600 dark:hover:border-blue-400"
     onClick={onClick}
   >
-    <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-5 group-hover:bg-blue-600 group-hover:text-white transition-all">
+    <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-5 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
       {icon}
     </div>
     <h3 className="text-base font-semibold mb-2 text-slate-900 dark:text-white">
