@@ -1,7 +1,17 @@
 import { Facebook, Twitter, Instagram, Youtube, Mail } from 'lucide-react';
-import { navigate } from '../../hooks/useLocation';
+import { useNavigate } from 'react-router-dom';
+import strongsLogo from '../../assets/Strongs.png';
+
+const Logo = () => (
+  <div className="flex items-center gap-2">
+    <img src={strongsLogo} alt="Strongs Logo" className="h-8 w-auto" />
+    <span className="text-xl font-bold text-white">STRONGS</span>
+  </div>
+);
 
 const Footer = () => {
+  const navigate = useNavigate();
+  
   const go = (path: string) => navigate(path);
 
   return (
