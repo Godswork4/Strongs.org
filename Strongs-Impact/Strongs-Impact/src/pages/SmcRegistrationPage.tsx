@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { supabase } from "../lib/supabaseClient";
+import smcflyer from "../../assets/smc.png";
 
 const fellowshipOptions = [
   "CAC Youth Fellowship",
@@ -155,6 +156,9 @@ const SmcRegistrationPage = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // show SMC image; don't use placeholder animation
+  const [imageError, setImageError] = useState(false);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -262,6 +266,26 @@ const SmcRegistrationPage = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-xl">
+        {/* SMC Logo / Flyer */}
+        <div className="flex justify-center mb-6">
+          {!imageError ? (
+            <img
+              src={smcflyer}
+              alt="SMC Flyer"
+              className="h-28 w-auto object-contain rounded-md shadow-md"
+              onError={() => setImageError(true)}
+              loading="lazy"
+            />
+          ) : (
+            <div className="flex items-center justify-center h-28 w-full rounded-md bg-slate-100 dark:bg-slate-800">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-slate-900 dark:text-white">SMC</div>
+                <div className="text-sm text-slate-500 dark:text-slate-400">Student Mission Conference</div>
+              </div>
+            </div>
+          )}
+        </div>
+
         <h1 className="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-white">
           SMC Registration
         </h1>
