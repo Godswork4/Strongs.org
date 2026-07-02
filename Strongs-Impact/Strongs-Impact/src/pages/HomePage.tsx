@@ -79,7 +79,7 @@ const UpcomingEventBanner = () => {
                     Student Mission Conference
                   </p>
                   <p className="text-sm md:text-base text-slate-400">
-                    July 8–12, 2026
+                    July 8–11, 2026
                   </p>
                 </div>
               )}
@@ -97,7 +97,7 @@ const UpcomingEventBanner = () => {
                 <div className="space-y-3 mb-8">
                   <div className="flex items-center gap-3 text-slate-300 text-sm md:text-base">
                     <Calendar className="h-5 w-5 md:h-6 md:w-6 text-blue-400 flex-shrink-0" />
-                    <span>July 8–12, 2026</span>
+                    <span>July 8–11, 2026</span>
                   </div>
                   <div className="flex items-center gap-3 text-slate-300 text-sm md:text-base">
                     <MapPin className="h-5 w-5 md:h-6 md:w-6 text-blue-400 flex-shrink-0" />
@@ -163,7 +163,7 @@ const HomePage = () => {
             Discover The Depth<br className="hidden sm:block" /> of God's Word
           </h1>
           <p className={`text-lg md:text-xl text-slate-300 mb-10 leading-relaxed ${fadeUp("delay-300")}`}>
-            Explore biblical resources, mission training, evangelism tools, and discipleship materials designed to help you grow spiritually, strengthen your faith, convert sinners, and impact your world.
+            Explore biblical resources, mission training, evangelism tools, and discipleship materials designed to help you grow spiritually, strengthen your faith, convert sinners, and impact your wo[...]
           </p>
           <div className={`flex flex-col sm:flex-row justify-center gap-4 ${fadeUp("delay-500")}`}>
             <button
@@ -308,10 +308,10 @@ interface CategoryCardProps {
 
 const CategoryCard = ({ icon, title, description, onClick }: CategoryCardProps) => (
   <div
-    className="group bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-7 flex flex-col items-center text-center cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-blue-600 dark:hover:border-blue-400"
+    className="group bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-7 flex flex-col items-center text-center cursor-pointer transition-all duration-300 hover[...]
     onClick={onClick}
   >
-    <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-5 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+    <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-5 group-hover:bg-blue-600 group-hover:text-white transitio[...]
       {icon}
     </div>
     <h3 className="text-base font-semibold mb-2 text-slate-900 dark:text-white">
