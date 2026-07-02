@@ -16,7 +16,7 @@ const UPCOMING_EVENTS: Event[] = [
   {
     id: 1,
     title: "Student Mission Conference",
-    date: "July 8–12, 2026",
+    date: "July 8–11, 2026",
     countdownTarget: "2026-07-08T00:00:00",
     location: "Lautech Inter-dominational Chapel",
     description: "Join us for Student Mission Conference 2026.",
